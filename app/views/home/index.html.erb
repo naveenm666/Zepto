@@ -1,38 +1,12 @@
-<div class="container-fluid">
-    <div class="row">
-        <nav class="navbar navbar-expand-lg navbar-light bg-skin-primary-darker" style="height: 90px;">
-            <div class="col-md-1">
-                <a class="avater" href="#">
-                    <img alt="" src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/7.0.3/images/logo.svg" width="105" height="35" decoding="async" data-nimg="1" class="relative overflow-hidden false max-w-none" loading="lazy" style="color: transparent; object-fit: contain">
-                </a>
-            </div>
-            <div class="col-md-2">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown <i class="fas fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search for over 5000 products" aria-label="Search">
-                </form>
-            </div>
-            <div class="col-md-3 login ">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item ">
-                    <a class="nav-link text-decoration-none", style: "color: white; " href="<%= new_user_session_path %>">Login</a>
-                    </li>
-                    <%= link_to "#", class: "btn btn-danger btn-lg text-decoration-none custom-btn", style: "color: white;" do %>
-                    <i class="bi bi-bag"></i>
-                                         <span>My Cart</span>
-                   <% end %>
-             </div>
-        </nav>
+<% @products.each do |product| %>
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title"><strong>Product: <%= product.name %></strong></h5>
+        <p class="card-text">Category: <%= product.category %></p>
+        <p class="card-text">Weight: <%= product.weight %>grms</p>
+        <p class="card-text">Price: <%= number_to_currency(product.price) %></p>
+        <p class="card-text">About: <%= product.about_product %></p>
+      </div>
     </div>
-</div>
+  <% end %>
+  
