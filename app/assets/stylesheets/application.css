@@ -14,42 +14,42 @@
  *= require_self
  */
 
- .bg-skin-primary-darker {
-    background-color: rgba(16, 5, 65, 0.8);  /* Replace #333 with the actual color code for the darker primary skin */
-    /* Other styling properties can be added if necessary */
+.bg-skin-primary-darker {
+    background-color: rgb(13, 6, 47); 
 }
- .dropdown {
-    padding-left: 100px;
+
+.dropdown {
     border-left: 5px;
     border-left-color: antiquewhite;
     border-left-width: 2px;
- }
- .d-flex {
+    padding-left: 100px;
+}
+
+.d-flex {
     padding-left: 0px;
     width:95%;
 
- }
- .login {
-    padding-left: 150px;
-    text-decoration: none;
-    font-size: 25px;
+}
 
+.login {
+   font-size: 25px;
+   padding-left: 150px;
+   text-decoration: none;
+}
 
- }
- .avater {
+.avater {
     padding-left: 50px;
- }
- .cart {
+}
+
+.cart {
     padding-left: 30px;
 }
-.custom-btn {
-    font-size: 25px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-left-width: 25px;
-    border-right-width: 25px;
-}
 
-  
- 
- 
+.custom-btn {
+
+   border-left-width: 25px;
+   border-right-width: 25px;
+   font-size: 25px;
+   padding-left: 20px;
+   padding-right: 20px;
+}
