@@ -1,3 +1,4 @@
+# The Category class is responsible for product category
 class Category < ApplicationRecord
     has_many :products
 

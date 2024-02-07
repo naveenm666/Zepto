@@ -24,6 +24,9 @@ plugins:
     enabled: true
     config:
       target_ruby_version: "3.1" # override the default parser with Parser::Ruby31
+  checks:
+      UnusedParameters:
+        enabled: false
   rubocop:
     enabled: false
     channel: rubocop-1-56-3
