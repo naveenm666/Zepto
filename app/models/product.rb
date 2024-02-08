@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-    belongs_to :category
+    belongs_to :subcategory
 
     validates :name, presence: true
     validates :weight, presence: true
@@ -11,7 +11,7 @@ class Product < ApplicationRecord
       end
 
     def self.ransackable_associations(auth_object = nil)
-        ["category"]
+        super + ["category"]
     end
         
     

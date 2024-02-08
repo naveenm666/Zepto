@@ -1,0 +1,6 @@
+<div class="container">
+  <h1><%= @product.name %></h1>
+  <p>Weight: <%= @product.weight %> grams</p>
+  <p>Price: <%= number_to_currency(@product.price, unit: '₹') %></p>
+  <p>Description: <%= @product.about_product %></p>
+</div>

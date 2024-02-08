@@ -1,12 +1,71 @@
-<% @products.each do |product| %>
-    <div class="card mb-4">
-      <div class="card-body">
-        <h5 class="card-title"><strong>Product: <%= product.name %></strong></h5>
-        <p class="card-text">Category: <%= product.category %></p>
-        <p class="card-text">Weight: <%= product.weight %>grms</p>
-        <p class="card-text">Price: <%= number_to_currency(product.price) %></p>
-        <p class="card-text">About: <%= product.about_product %></p>
-      </div>
+<div class="container-fluid" style="max-height: 100%; overflow-y: auto; padding-left:0px; padding-right:0px;">
+  <div class="container-fluid">
+    <div class="row bg-blue">
+      <h4 class="mb-1">Delivery in 21 Mins</h4>
+      <p>Higher Delivery Time Due To Heavy Traffic</p>
     </div>
-  <% end %>
+  </div>
+
+  <div class="container">
+    <div class="row bg-green"> 
+      <img alt="paan-corner-banner" fetchpriority="high" width="1458" height="255" decoding="async" data-nimg="1" class="relative overflow-hidden false p-4 w-full pt-[5.5rem]" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcset="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 256w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 384w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 640w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 750w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 828w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 1080w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 1200w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 1920w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 2048w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 3840w" src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png" style="color: transparent; object-fit: fill;">
+    </div>
+  </div>
+
+  <div class="container">
+     <div style="width: 100%; margin-bottom: 16px; padding-bottom: 0px; padding-top: 0px;">
+       <div class="row ">
+         <img alt="50 free.png" loading="lazy" width="100%" height="100%" decoding="async" data-nimg="1" class="relative overflow-hidden false " sizes="(max-width: 768px) 100vw, (max-width: 5000px) 50vw, 33vw" srcset="https://cdn.zeptonow.com/production///tr:w-984,ar-984-408,pr-true,f-auto,q-80/inventory/banner/33845ebe-993a-468d-99a5-671a705ba35b.png 256w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-408,pr-true,f-auto,q-80/inventory/banner/33845ebe-993a-468d-99a5-671a705ba35b.png 384w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-408,pr-true,f-auto,q-80/inventory/banner/33845ebe-993a-468d-99a5-671a705ba35b.png 640w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-408,pr-true,f-auto,q-80/inventory/banner/33845ebe-993a-468d-99a5-671a705ba35b.png 750w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-408,pr-true,f-auto,q-80/inventory/banner/33845ebe-993a-468d-99a5-671a705ba35b.png 828w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-408,pr-true,f-auto,q-80/inventory/banner/33845ebe-993a-468d-99a5-671a705ba35b.png 1080w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-408,pr-true,f-auto,q-80/inventory/banner/33845ebe-993a-468d-99a5-671a705ba35b.png 1200w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-408,pr-true,f-auto,q-80/inventory/banner/33845ebe-993a-468d-99a5-671a705ba35b.png 1920w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-408,pr-true,f-auto,q-80/inventory/banner/33845ebe-993a-468d-99a5-671a705ba35b.png 2048w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-408,pr-true,f-auto,q-80/inventory/banner/33845ebe-993a-468d-99a5-671a705ba35b.png 3840w" src="https://cdn.zeptonow.com/production///tr:w-984,ar-984-408,pr-true,f-auto,q-80/inventory/banner/33845ebe-993a-468d-99a5-671a705ba35b.png" style="color: transparent; object-fit: contain; width: 100%; aspect-ratio: 2.41176 / 1; margin-bottom: -1px; padding-left: 16px; padding-right: 16px;">
+       </div>
+     </div>  
+  </div>
+
+   <div class="container">
+    <div style="width: 100%; margin-bottom: 16px; padding-bottom: 0px; padding-top: 0px;">
+      <div class="row ">
+        <img alt="Property 1=Brownie.png" loading="lazy" width="100%" height="100%" decoding="async" data-nimg="1" class="relative overflow-hidden false " sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcset="https://cdn.zeptonow.com/production///tr:w-984,ar-984-132,pr-true,f-auto,q-80/inventory/banner/6fb2be97-3019-40ab-9e89-8683e72ae47e.png 256w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-132,pr-true,f-auto,q-80/inventory/banner/6fb2be97-3019-40ab-9e89-8683e72ae47e.png 384w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-132,pr-true,f-auto,q-80/inventory/banner/6fb2be97-3019-40ab-9e89-8683e72ae47e.png 640w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-132,pr-true,f-auto,q-80/inventory/banner/6fb2be97-3019-40ab-9e89-8683e72ae47e.png 750w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-132,pr-true,f-auto,q-80/inventory/banner/6fb2be97-3019-40ab-9e89-8683e72ae47e.png 828w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-132,pr-true,f-auto,q-80/inventory/banner/6fb2be97-3019-40ab-9e89-8683e72ae47e.png 1080w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-132,pr-true,f-auto,q-80/inventory/banner/6fb2be97-3019-40ab-9e89-8683e72ae47e.png 1200w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-132,pr-true,f-auto,q-80/inventory/banner/6fb2be97-3019-40ab-9e89-8683e72ae47e.png 1920w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-132,pr-true,f-auto,q-80/inventory/banner/6fb2be97-3019-40ab-9e89-8683e72ae47e.png 2048w, https://cdn.zeptonow.com/production///tr:w-984,ar-984-132,pr-true,f-auto,q-80/inventory/banner/6fb2be97-3019-40ab-9e89-8683e72ae47e.png 3840w" src="https://cdn.zeptonow.com/production///tr:w-984,ar-984-132,pr-true,f-auto,q-80/inventory/banner/6fb2be97-3019-40ab-9e89-8683e72ae47e.png" style="color: transparent; object-fit: contain; width: 100%; aspect-ratio: 7.45455 / 1; margin-bottom: -1px; padding-left: 16px; padding-right: 16px;">
+      </div>
+    </div>  
+   </div>
+
+   <div class="container">
+   <h5 class="mb-2 ml-2">Products For You </h5>
+   <div class="products-container d-flex flex-nowrap">
+     <% @products.first(7).each do |product| %>
+       <div class="mr-2" style="width: 180px;">
+         <a href="<%= product_path(product) %>">
+           <div class="card shadow" style="width: 100%; height: 220px;">
+             <div class="card-body">
+               <h5 class="card-title"><strong><%= product.name %></strong></h5>
+               <p class="card-text"><%= product.weight %>grms</p>
+               <h5 class="card-text"><strong><%= number_to_currency(product.price, unit: '₹') %></strong></h5>
+             </div>
+           </div>
+         </a>
+       </div>
+     <% end %>
+   </div>
+</div>
+
+ 
+
+  <div class="container">
+  <h5 class="mb-2">Explore By Categories</h5>
+  <div class="row">
+    <% @categories.each do |category| %>
+      <div class="col-mb-1">
+         <div class="card shadow" style="width:260px; height: 120px;">
+          <div class="card-body">
+           </div>
+         </div>
+       <h5 class="card-title"><strong><%= category.name %></strong></h5>
+     </div>
+   <% end %>
+   </div>
+  </div>
+</div>
+
+
+
+
   

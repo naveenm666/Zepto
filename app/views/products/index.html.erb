@@ -1,0 +1,19 @@
+<!-- app/views/products/index.html.erb -->
+
+<div class="container">
+  <h1>Products</h1>
+  <div class="row">
+    <% @products.each do |product| %>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text">Weight: <%= product.weight %> grams</p>
+            <p class="card-text">Price: <%= number_to_currency(product.price, unit: '₹') %></p>
+            <p class="card-text">Description: <%= product.description %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

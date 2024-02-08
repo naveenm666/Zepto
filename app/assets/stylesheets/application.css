@@ -53,3 +53,14 @@
    padding-left: 20px;
    padding-right: 20px;
 }
+.card-link:hover {
+    text-decoration: none;
+}
+.bg-blue {
+    background-color: rgb(106, 23, 123); /* Change this to your desired shade of blue */
+    color: white; /* Add text color as needed to ensure readability */
+    text-align: center;
+    font-size: 15px;
+    padding-top: 5px;
+}
+  

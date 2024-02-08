@@ -1,6 +1,7 @@
 # The Category class is responsible for product category
 class Category < ApplicationRecord
-    has_many :products
+    has_many :subcategories
+    has_many :products, through: :subcategories
 
     validates :name, presence: true
 
@@ -9,6 +10,7 @@ class Category < ApplicationRecord
       end
     
     def self.ransackable_associations(auth_object = nil)
-        ["products"]
+       super + ["products"]
     end  
+    
 end
