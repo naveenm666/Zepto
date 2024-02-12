@@ -1,0 +1,8 @@
+<h1 style="margin-top:100px;"><%= @category.name %></h1>
+
+<h2>Subcategories</h2>
+<ul>
+  <% @subcategories.each do |subcategory| %>
+    <li><%= link_to subcategory.name, category_subcategories_path(@category, subcategory) %></li>
+  <% end %>
+</ul>

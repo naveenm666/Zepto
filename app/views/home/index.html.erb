@@ -1,9 +1,10 @@
-<div class="container-fluid" style="max-height: 100%; overflow-y: auto; padding-left:0px; padding-right:0px;">
+<div class="container-fluid" style="max-height: 100%; overflow-y: auto; padding-left:0px; padding-right:0px;margin-top:90px;">
   <div class="container-fluid">
-    <div class="row bg-blue">
-      <h4 class="mb-1">Delivery in 21 Mins</h4>
-      <p>Higher Delivery Time Due To Heavy Traffic</p>
-    </div>
+  <div class="row bg-blue">
+  <h4 id="delivery-time" class="mb-1">Delivery in </h4>
+  <h4><%= @initial_delivery_time %></h4>
+</div>
+
   </div>
 
   <div class="container">
@@ -28,44 +29,77 @@
     </div>  
    </div>
 
-   <div class="container">
-   <h5 class="mb-2 ml-2">Products For You </h5>
-   <div class="products-container d-flex flex-nowrap">
-     <% @products.first(7).each do |product| %>
-       <div class="mr-2" style="width: 180px;">
-         <a href="<%= product_path(product) %>">
-           <div class="card shadow" style="width: 100%; height: 220px;">
-             <div class="card-body">
-               <h5 class="card-title"><strong><%= product.name %></strong></h5>
-               <p class="card-text"><%= product.weight %>grms</p>
-               <h5 class="card-text"><strong><%= number_to_currency(product.price, unit: '₹') %></strong></h5>
-             </div>
-           </div>
-         </a>
-       </div>
-     <% end %>
-   </div>
-</div>
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h5 class="mb-0">Products For You</h5>
+      <p class="mb-0"><a href="<%= all_products_path %>">See more</a></p>
+      </div>
+      </div>
+      <div class="container" style="overflow-x: auto; white-space: nowrap; width: 90%;">
+      <% @products.first(8).each do |product| %>
+        <div class="mr-2" style="display: inline-block; width: 180px;">
+          <a href="<%= product_path(product) %>">
+            <div class="card" style="width: 170px; height: 220px;">
+              <div class="card-body"style="overflow: hidden; text-overflow: ellipsis; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);">
+                <h5 class="card-title" style="font-size: 16px; white-space: normal;"><strong><%= product.name %></strong></h5>
+                <p class="card-text" style="font-size: 14px;"><%= product.weight %>grms</p>
+                <h5 class="card-text" style="font-size: 16px;"><strong><%= number_to_currency(product.price, unit: '₹') %></strong></h5>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% end %>
+  </div>
+    
+
+
 
  
-
   <div class="container">
-  <h5 class="mb-2">Explore By Categories</h5>
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h5 class="mb-2">Explore By Categories</h5>
+    <p class="mb-0"><a href="<%= all_categories_path %>">See more</a></p>
+  </div>
+</div>
+
+<div class="container">
   <div class="row">
-    <% @categories.each do |category| %>
-      <div class="col-mb-1">
-         <div class="card shadow" style="width:260px; height: 120px;">
-          <div class="card-body">
-           </div>
-         </div>
-       <h5 class="card-title"><strong><%= category.name %></strong></h5>
-     </div>
-   <% end %>
-   </div>
+    <% @categories.each_slice(7) do |category_slice| %>
+      <div class="row">
+        <% category_slice.each do |category| %>
+          <div class="col-2">
+            <a href="<%= category_path(category) %>">
+              <div class="card category-container" style="width: 100%; height: 150px;"> 
+                <div class="card-body">
+                  <!-- Card content goes here -->
+                </div>
+              </div>
+              <h5><strong><%= category.name %></strong></h5>
+            </a>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <% @products.each_slice(5).take(2) do |product_slice| %>
+      <div class="row">
+        <% product_slice.each do |product| %>
+          <div class="col-2 border border-2">
+            <h5><strong><%= product.name %></strong></h5>
+            <p><%= product.description %></p>
+            <p>Price: <%= number_to_currency(product.price) %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
 
 
 
 
-  

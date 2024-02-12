@@ -6,8 +6,13 @@ class ProductsController < ApplicationController
     end
   
     def show
-      # This action will handle displaying an individual product's details
+      @product = Product.find(params[:id])
     end
+
+    def all
+      @products = Product.all.paginate(page: params[:page], per_page: 30)
+    end
+  
   
     private
   

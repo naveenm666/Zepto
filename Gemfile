@@ -71,6 +71,8 @@ end
 gem "devise", "~> 4.9"
 gem 'activeadmin'
 gem 'sassc-rails'
+gem 'will_paginate'
+gem 'jquery-rails'
 
 
 
