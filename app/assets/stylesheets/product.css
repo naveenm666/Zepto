@@ -1,0 +1,6 @@
+.product-container .card-body {
+    font-size: 14px; /* Decreased font size */
+  }
+  .product-container .border {
+    border: 2px solid #ccc; /* Add border styling */
+  }  
