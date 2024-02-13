@@ -4,7 +4,19 @@ ActiveAdmin.register Product do
     #
     # Uncomment all parameters which should be permitted for assignment
     #
-    permit_params :name, :weight, :price, :about_product, :subcategory_id
+    permit_params :name, :weight, :price, :about_product, :subcategory_id, :product_weight
+    
+    form do |f|
+      f.inputs "Product Details" do
+        f.input :name
+        f.input :weight
+        f.input :price
+        f.input :about_product
+        f.input :subcategory
+        f.input :product_weight, as: :select, collection: ['kg', 'grams', 'liters', 'ml']
+      end
+      f.actions
+    end
     #
     # or
     #
@@ -15,4 +27,6 @@ ActiveAdmin.register Product do
     # end
     
   end
+
+
   

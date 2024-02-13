@@ -70,8 +70,7 @@ end
 
 gem "devise", "~> 4.9"
 gem 'activeadmin'
-
-gem 'will_paginate'
+gem 'kaminari'
 # Use jquery as the JavaScript librar
 gem 'jquery-rails'
 

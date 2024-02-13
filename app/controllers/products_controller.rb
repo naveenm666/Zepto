@@ -10,9 +10,8 @@ class ProductsController < ApplicationController
     end
 
     def all
-      @products = Product.all.paginate(page: params[:page], per_page: 30)
+      @products = Product.all.page(params[:page]).per(30)
     end
-  
   
     private
   

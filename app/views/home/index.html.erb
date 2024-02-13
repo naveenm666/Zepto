@@ -1,10 +1,9 @@
 <div class="container-fluid" style="max-height: 100%; overflow-y: auto; padding-left:0px; padding-right:0px;margin-top:90px;">
   <div class="container-fluid">
-  <div class="row bg-blue">
-  <h4 id="delivery-time" class="mb-1">Delivery in </h4>
-  <h4><%= @initial_delivery_time %></h4>
-</div>
-
+    <div class="row bg-blue">
+      <h4 id="delivery-time" class="mb-1">Delivery in </h4>
+      <h4><%= @initial_delivery_time %></h4>
+    </div>
   </div>
 
   <div class="container">
@@ -33,9 +32,10 @@
     <div class="d-flex justify-content-between align-items-center mb-2">
       <h5 class="mb-0">Products For You</h5>
       <p class="mb-0"><a href="<%= all_products_path %>">See more</a></p>
-      </div>
-      </div>
-      <div class="container" style="overflow-x: auto; white-space: nowrap; width: 90%;">
+    </div>
+  </div>
+
+  <div class="container" style="overflow-x: auto; white-space: nowrap; width: 90%;">
       <% @products.first(8).each do |product| %>
         <div class="mr-2" style="display: inline-block; width: 180px;">
           <a href="<%= product_path(product) %>">
@@ -51,53 +51,54 @@
       <% end %>
   </div>
     
+  
 
 
-
- 
   <div class="container">
-  <div class="d-flex justify-content-between align-items-center mb-2">
-    <h5 class="mb-2">Explore By Categories</h5>
-    <p class="mb-0"><a href="<%= all_categories_path %>">See more</a></p>
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h5 class="mb-2">Explore By Categories</h5>
+      <p class="mb-0"><a href="<%= all_categories_path %>">See more</a></p>
+    </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="row">
-    <% @categories.each_slice(7) do |category_slice| %>
-      <div class="row">
-        <% category_slice.each do |category| %>
-          <div class="col-2">
-            <a href="<%= category_path(category) %>">
-              <div class="card category-container" style="width: 100%; height: 150px;"> 
-                <div class="card-body">
-                  <!-- Card content goes here -->
+  <div class="container">
+    <div class="row">
+      <% @categories.each_slice(7) do |category_slice| %>
+        <div class="row">
+          <% category_slice.each do |category| %>
+            <div class="col-2">
+              <a href="<%= category_path(category) %>">
+                <div class="card category-container" style="width: 100%; height: 150px;"> 
+                  <div class="card-body">
+                    <!-- Card content goes here -->
+                  </div>
                 </div>
-              </div>
-              <h5><strong><%= category.name %></strong></h5>
-            </a>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+                <h5><strong><%= category.name %></strong></h5>
+              </a>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
 
 
-<div class="container">
-  <div class="row">
-    <% @products.each_slice(5).take(2) do |product_slice| %>
-      <div class="row">
-        <% product_slice.each do |product| %>
-          <div class="col-2 border border-2">
-            <h5><strong><%= product.name %></strong></h5>
-            <p><%= product.description %></p>
-            <p>Price: <%= number_to_currency(product.price) %></p>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+  <div class="container">
+    <div class="row">
+      <% @products.each_slice(5).take(2) do |product_slice| %>
+        <div class="row">
+          <% product_slice.each do |product| %>
+            <div class="col-2 border border-2">
+              <h5><strong><%= product.name %></strong></h5>
+              <p><%= product.description %></p>
+              <p>Price: <%= number_to_currency(product.price) %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
+  
 </div>
 
 
