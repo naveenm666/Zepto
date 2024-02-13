@@ -70,9 +70,15 @@ end
 
 gem "devise", "~> 4.9"
 gem 'activeadmin'
-gem 'sassc-rails'
+
 gem 'will_paginate'
+# Use jquery as the JavaScript librar
 gem 'jquery-rails'
 
+# Use jquery-ui for pretty UI
+gem 'jquery-ui-rails'
+
+# Use Sass to process CSS
+gem "sassc-rails"
 
 

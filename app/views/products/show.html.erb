@@ -1,6 +1,24 @@
-<div class="container">
-  <h1><%= @product.name %></h1>
-  <p>Weight: <%= @product.weight %> grams</p>
-  <p>Price: <%= number_to_currency(@product.price, unit: '₹') %></p>
-  <p>Description: <%= @product.about_product %></p>
+<div class="container" style="margin-top:150px;">
+ <div class="row">
+  <div class="col-6">
+  <div class="card" style="width:90%; height: 350px;">
+  <div class="card-body">
+  </div>
+
+  </div>
+
+  <h4 style="margin-top:30px;">About Product</h4>
+  <p><%= @product.about_product %></p>
+
+  </div>
+  <div class="col-6">
+  <p> Home ><%= @product.name %></p>
+  <h4><%= @product.name %></h4>
+  <p><%= @product.weight %> grams</p>
+  <h4><%= number_to_currency(@product.price, unit: '₹') %></h4>
+  <a class="btn btn-danger btn-lg text-decoration-none custom-btn" style="color: white; width:100px;" href="#">
+      <span>Add</span>
+  </a>
+  </div>
+ </div> 
 </div>
