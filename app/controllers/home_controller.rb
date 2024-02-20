@@ -5,6 +5,23 @@ class HomeController < ApplicationController
     @categories = Category.all
     @initial_delivery_time = calculate_updated_delivery_time  
   end
+  
+  def add_to_cart
+    @product = Product.find(params[:id])
+
+    session[:cart] = session[:cart] || {}
+    session[:cart][@product.id] = { quantity: 1 }
+  end
+
+  def increment_cart_quantity
+    @product = Product.find(params[:id])
+    session[:cart][@product.id][:quantity] += 1
+  end
+
+  def decrement_cart_quantity
+    @product = Product.find(params[:id])
+    session[:cart][@product.id][:quantity] -= 1
+  end
 
   def update_delivery_time
     updated_delivery_time = calculate_updated_delivery_time

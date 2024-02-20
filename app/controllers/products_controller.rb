@@ -12,6 +12,23 @@ class ProductsController < ApplicationController
     def all
       @products = Product.all.page(params[:page]).per(30)
     end
+
+    def add_to_cart
+      @product = Product.find(params[:id])
+
+      session[:cart] = session[:cart] || {}
+      session[:cart][@product.id] = { quantity: 1 }
+    end
+
+    def increment_cart_quantity
+      @product = Product.find(params[:id])
+      session[:cart][@product.id][:quantity] += 1
+    end
+
+    def decrement_cart_quantity
+      @product = Product.find(params[:id])
+      session[:cart][@product.id][:quantity] -= 1
+    end
   
     private
   

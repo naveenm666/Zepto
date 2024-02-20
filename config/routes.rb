@@ -4,13 +4,18 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   root"home#index"
-  resources :products
+  resources :products do
+    post :add_to_cart, on: :member
+    post :increment_cart_quantity, on: :member
+    post :decrement_cart_quantity, on: :member
+  end
   get 'all_products', to: 'products#all', as: 'all_products'
   get 'all_categories', to: 'categories#all', as: 'all_categories'
 
   resources :categories do
     resources :subcategories
   end
+
   
 
 

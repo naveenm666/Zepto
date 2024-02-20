@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_13_062016) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_14_061320) do
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -51,7 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_13_062016) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "subcategory_id", null: false
-    t.string "product_weight"
+    t.integer "product_weight", limit: 1
     t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
   end
 
