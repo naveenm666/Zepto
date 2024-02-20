@@ -10,7 +10,7 @@ class Product < ApplicationRecord
     enum :product_weight, [:kg, :grams, :liters, :ml]
 
     def self.ransackable_attributes(auth_object = nil)
-        ["about_product", "created_at", "id", "id_value", "name", "price", "updated_at", "weight","product_weight"]
+        ["about_product", "created_at", "id", "id_value", "name", "price", "updated_at", "weight","product_weight","country_of_origin", "shelf_life", "manufacturer_name", "manufacturer_address"]
       end
 
     def self.ransackable_associations(auth_object = nil)

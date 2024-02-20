@@ -6,8 +6,16 @@
         </div>
       </div>
 
-     <h4 style="margin-top:30px;">About Product</h4>
-     <p><%= @product.about_product %></p>
+      <h4 style="margin-top:30px;">About Product</h4>
+      <ul>
+        <li>Description:<%= @product.about_product %></li>
+        <li>Country_of_origin:<%= @product.country_of_origin %></li>
+        <li><%= @product.shelf_life %></li>
+        <li><%= @product.manufacturer_name %></li>
+        <li><%= @product.manufacturer_address %></li>
+      </ul>
+      
+
     </div>
 
     <div class="col-6">
