@@ -1,12 +1,14 @@
 class ProductsController < ApplicationController
-    before_action :set_product, only: [:show] # Ensure set_product is called only for the 'show' action
+    before_action :set_product, only: [:show]
   
     def index
-      # Your index action code here
+      @subcategories = Subcategory.all
+      @products = Product.all
     end
   
     def show
       @product = Product.find(params[:id])
+      
     end
 
     def all
@@ -15,7 +17,6 @@ class ProductsController < ApplicationController
 
     def add_to_cart
       @product = Product.find(params[:id])
-
       session[:cart] = session[:cart] || {}
       session[:cart][@product.id] = { quantity: 1 }
     end
@@ -29,6 +30,7 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
       session[:cart][@product.id][:quantity] -= 1
     end
+
   
     private
   

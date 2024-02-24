@@ -23,12 +23,12 @@
       <h4><%= @product.name %></h4>
       <p><%= @product.weight %> grams</p>
       <h4><%= number_to_currency(@product.price, unit: '₹') %></h4>
-      <div id="add-to-cart-btn">
-         <%= form_for :product, url: "/products/#{@product.id}/add_to_cart", method: :post, remote: true do |f| %>
-           <%= f.submit "Add", class: "btn btn-danger btn-lg text-decoration-none custom-btn"%>
-         <% end %>
-       </div>
-       <div id="quantity-buttons"></div>
-     </div>
-   </div> 
+      <div id="add-to-cart-btn-<%= @product.id %>" >
+        <%= form_for :product, url: "/products/#{@product.id}/add_to_cart", method: :post, remote: true do |f| %>
+            <%= f.submit "Add", class: "btn btn-danger btn-lg text-decoration-none custom-btn"%>
+        <% end %>
+      </div>
+      <div id="quantity-buttons-<%= @product.id %>"></div>
+    </div>
+  </div> 
 </div>

@@ -1,8 +1,45 @@
-<h1 style="margin-top:100px;"><%= @category.name %></h1>
+<h1 style="margin-top:100px;"></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 mt-2 mb-2">
+      <p>Top Picks</p>
+      <% @subcategories.each do |subcategory| %>
+        <div>
+          <%= form_for :subcategory, url: products_subcategory_path(subcategory), method: :get, remote: true do |form| %>
+            <%= form.hidden_field :subcategory_id, value: subcategory.id %>
+            <%= form.submit subcategory.name, class: "subcategory-link" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 
-<h2>Subcategories</h2>
-<ul>
-  <% @subcategories.each do |subcategory| %>
-    <li><%= link_to subcategory.name, category_subcategories_path(@category, subcategory) %></li>
-  <% end %>
-</ul>
+    <div class="col-md-10">
+      <div class="row" id="product-list">
+      <h2>Top Picks</h2>
+        <% @products.each_slice(6) do |product_slice| %>
+          <% product_slice.each do |product| %>
+            <div class="col-md-4 ">
+              <div class="card h-100">
+                <%= link_to product_path(product) do %>
+                  <div class="card-body">
+                    <h5 class="card-title" style=" overflow: hidden; font-size: 16px;"><%= product.name %></h5>
+                    <p class="card-text">Weight: <%= product.weight %></p>
+                    <p class="card-text">Price: <%= product.price %></p>
+                  </div>
+                <% end %>
+                <div style="position: absolute; bottom: 20px; left: 70%; transform: translateX(-50%);">
+                  <div id="add-to-cart-btn" >
+                    <%= form_for :product, url: "/products/#{product.id}/add_to_cart", method: :post, remote: true do |f| %>
+                      <%= f.submit "Add ", class: "btn btn-danger btn-block"%>
+                    <% end %>
+                  </div>
+                  <div id="quantity-buttons"></div>
+                </div>
+              </div> 
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
