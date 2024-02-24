@@ -10,5 +10,6 @@ class CategoriesController < ApplicationController
     @categories = Category.all.page(params[:page]).per(30)
 
   end
-  
+
+
 end

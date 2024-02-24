@@ -6,5 +6,5 @@ class SubcategoriesController < ApplicationController
       format.js # Render a JavaScript response (products.js.erb)
     end
   end
- 
+
 end

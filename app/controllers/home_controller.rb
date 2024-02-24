@@ -9,6 +9,7 @@ class HomeController < ApplicationController
 
   def update_delivery_time
     updated_delivery_time = calculate_updated_delivery_time
+
     render json: { delivery_time: updated_delivery_time }
   end
 
