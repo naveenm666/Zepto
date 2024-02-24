@@ -51,12 +51,12 @@
           </div> 
         <% end %>
         <div style="position: absolute; bottom: 20px; left: 70%; transform: translateX(-50%);">
-          <div id="add-to-cart-btn" >
+          <div id="add-to-cart-btn-<%= product.id %>" >
             <%= form_for :product, url: "/products/#{product.id}/add_to_cart", method: :post, remote: true do |f| %>
               <%= f.submit "Add", class: "btn btn-danger btn-lg text-decoration-none custom-btn"%>
             <% end %>
           </div>
-          <div id="quantity-buttons"></div>
+          <div id="quantity-buttons-<%= product.id %>"></div>
         </div>
       </div>
     <% end %>
