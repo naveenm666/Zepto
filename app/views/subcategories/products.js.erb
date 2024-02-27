@@ -1,0 +1,2 @@
+$('#product-list').empty();
+$('#product-list').html("<%= escape_javascript(render partial: 'products', locals: { products: @products }) %>");

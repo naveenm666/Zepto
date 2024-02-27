@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     @categories = Category.all
     @initial_delivery_time = calculate_updated_delivery_time  
   end
+  
 
   def update_delivery_time
     updated_delivery_time = calculate_updated_delivery_time
@@ -13,8 +14,6 @@ class HomeController < ApplicationController
   end
 
   private
-
-  
 
   def calculate_updated_delivery_time
     

@@ -1,18 +1,15 @@
 <div class="container " style="margin-top:100px;">
-<% @categories.each_slice(7) do |category_slice| %>
-  <div class="row">
-    <% category_slice.each do |category| %>
-      <div class="col">
-        <div class="card">
-          <a href="<%= category_path(category) %>">
-            <h3><%= category.name %></h3>
-            <!-- Additional category information can be added here -->
-          </a>
+  <% @categories.each_slice(7) do |category_slice| %>
+    <div class="row">
+      <% category_slice.each do |category| %>
+        <div class="col">
+          <div class="card">
+            <a href="<%= category_path(category) %>">
+              <h3><%= category.name %></h3>
+            </a>
+          </div>
         </div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
-</body>
-</html>

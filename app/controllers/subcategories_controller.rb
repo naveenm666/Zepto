@@ -1,13 +1,12 @@
 class SubcategoriesController < ApplicationController
-  def index
+  def products
     @subcategory = Subcategory.find(params[:id])
     @products = @subcategory.products
+    # respond_to do |format|
+    #   format.html
+    #   format.js # Render a JavaScript response (products.js.erb)
+    # end
+    # render 'products.js.erb'
   end
-  
-    
-      def show
-        @subcategory = Subcategory.find(params[:id])
-        @products = @subcategory.products
-      end
 
 end

@@ -47,6 +47,7 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -70,9 +71,14 @@ end
 
 gem "devise", "~> 4.9"
 gem 'activeadmin'
-gem 'sassc-rails'
-gem 'will_paginate'
+gem 'kaminari'
+# Use jquery as the JavaScript librar
 gem 'jquery-rails'
 
+# Use jquery-ui for pretty UI
+gem 'jquery-ui-rails'
+
+# Use Sass to process CSS
+gem "sassc-rails"
 
 

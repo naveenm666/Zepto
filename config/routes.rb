@@ -4,15 +4,32 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   root"home#index"
-  resources :products
+  resources :products do
+    post :add_to_cart, on: :member
+    post :increment_cart_quantity, on: :member
+    post :decrement_cart_quantity, on: :member
+  end
   get 'all_products', to: 'products#all', as: 'all_products'
   get 'all_categories', to: 'categories#all', as: 'all_categories'
 
-  resources :categories do
-    resources :subcategories
+  resources :categories, only: [:show] do
+    resources :subcategories, only: [:index]
+    resources :products, only: [:index]
   end
-  
 
+
+
+# config/routes.rb
+resources :subcategories do
+  get 'products', on: :member
+end
+
+
+resources :categories do
+  resources :subcategories do
+    get 'products', on: :member
+  end
+end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
