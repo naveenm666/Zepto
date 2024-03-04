@@ -1,7 +1,0 @@
-<%= form_for :product, url: "/products/#{@product.id}/decrement_cart_quantity", method: :post, remote: true do |f| %>
-    <%= f.submit "-", class: "btn btn-danger btn-lg text-decoration-none custom-btn"%>
-<% end %>
-<%= session[:cart]["#{@product.id}"].try(:[], "quantity") || 0 %>
-<%= form_for :product, url: "/products/#{@product.id}/increment_cart_quantity", method: :post, remote: true do |f| %>
-    <%= f.submit "+", class: "btn btn-danger btn-lg text-decoration-none custom-btn"%>
-<% end %>

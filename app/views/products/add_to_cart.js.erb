@@ -1,3 +1,0 @@
-$("#add-to-cart-btn-<%= @product.id %>").empty();
-$("#quantity-buttons-<%= @product.id %>").html("<%= escape_javascript render 'quantity_buttons' %>");
-console.log('Product added to cart:', '<%= j @product.name %>');

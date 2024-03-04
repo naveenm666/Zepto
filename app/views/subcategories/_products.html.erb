@@ -14,12 +14,20 @@
         </div>
       <% end %>
       <div style="position: absolute; bottom: 20px; left: 70%; transform: translateX(-50%);">
-        <div id="add-to-cart-btn-<%= product.id %>" >
-          <%= form_for :product, url: "/products/#{product.id}/add_to_cart", method: :post, remote: true do |f| %>
-            <%= f.submit "Add ", class: "btn btn-danger btn-block"%>
+      <div id="quantity-buttons-<%= @product.id %>">
+      <% if @cart.cart_products.where(product_id: @product.id).exists? %>
+        <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: @product.id), product: @product } %>
+      <% else %>
+        <% if @cart %>
+        <%= form_for(@product, url: add_to_cart_cart_path(product_id: @product.id), method: :post, remote: true) do |f| %>          
+            <%= f.hidden_field :product_id, value: @product.id %>
+            <%= f.submit "Add", class: "button" %>
           <% end %>
-        </div>
-        <div id="quantity-buttons-<%= product.id %>"></div>
+        <% else %>
+          
+        <% end %>
+      <% end %>
+    </div>
       </div>
     </div> 
   </div>
