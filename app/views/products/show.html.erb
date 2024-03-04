@@ -1,34 +1,42 @@
-<div class="container" style="margin-top:150px;">
+<div class="container" style="margin-top: 150px;">
   <div class="row">
     <div class="col-6">
-     <div class="card" style="width:90%; height: 350px;">
+      <div class="card" style="width: 90%; height: 350px;">
         <div class="card-body">
+          <!-- Content inside the card -->
         </div>
       </div>
 
-      <h4 style="margin-top:30px;">About Product</h4>
+      <h4 style="margin-top: 30px;">About Product</h4>
       <ul>
-        <li>Description:<%= @product.about_product %></li>
-        <li>Country_of_origin:<%= @product.country_of_origin %></li>
-        <li><%= @product.shelf_life %></li>
-        <li><%= @product.manufacturer_name %></li>
-        <li><%= @product.manufacturer_address %></li>
+        <li>Description: <%= @product.about_product %></li>
+        <li>Country of Origin: <%= @product.country_of_origin %></li>
+        <li>Shelf Life: <%= @product.shelf_life %></li>
+        <li>Manufacturer Name: <%= @product.manufacturer_name %></li>
+        <li>Manufacturer Address: <%= @product.manufacturer_address %></li>
       </ul>
-      
-
     </div>
 
     <div class="col-6">
-      <p> Home ><%= @product.name %></p>
+      <p> Home &gt; <%= @product.name %></p>
       <h4><%= @product.name %></h4>
       <p><%= @product.weight %> grams</p>
       <h4><%= number_to_currency(@product.price, unit: '₹') %></h4>
-      <div id="add-to-cart-btn-<%= @product.id %>" >
-        <%= form_for :product, url: "/products/#{@product.id}/add_to_cart", method: :post, remote: true do |f| %>
-            <%= f.submit "Add", class: "btn btn-danger btn-lg text-decoration-none custom-btn"%>
+
+      <div id="quantity-buttons-<%= @product.id %>">
+        <% if @cart.cart_products.where(product_id: @product.id).exists? %>
+          <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: @product.id), product: @product } %>
+        <% else %>
+          <% if @cart %>
+            <%= form_for(@product, url: add_to_cart_cart_path(product_id: @product.id), method: :post, remote: true) do |f| %>          
+              <%= f.hidden_field :product_id, value: @product.id %>
+              <%= f.submit "Add", class: "button" %>
+            <% end %>
+          <% else %>
+            <!-- Handle case where cart is not available -->
+          <% end %>
         <% end %>
       </div>
-      <div id="quantity-buttons-<%= @product.id %>"></div>
     </div>
   </div> 
 </div>

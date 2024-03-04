@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show] # Ensure set_product is called only for the 'show' action
-  
+    before_action :authenticate_user!, only: [:show]
+
     def index
       @subcategories = Subcategory.all
       @products = Product.all
@@ -8,29 +9,14 @@ class ProductsController < ApplicationController
   
     def show
       @product = Product.find(params[:id])
-      
+      @cart = current_user.cart || current_user.build_cart
+
     end
 
     def all
       @products = Product.all.page(params[:page]).per(30)
     end
 
-    def add_to_cart
-      @product = Product.find(params[:id])
-
-      session[:cart] = session[:cart] || {}
-      session[:cart][@product.id] = { quantity: 1 }
-    end
-
-    def increment_cart_quantity
-      @product = Product.find(params[:id])
-      session[:cart][@product.id][:quantity] += 1
-    end
-
-    def decrement_cart_quantity
-      @product = Product.find(params[:id])
-      session[:cart][@product.id][:quantity] -= 1
-    end
 
   
     

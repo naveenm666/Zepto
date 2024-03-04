@@ -1,0 +1,10 @@
+  <%= form_for(:product, url: decrement_cart_quantity_cart_path(id: cart_product.product.id), method: :post, remote: true) do |f| %> 
+    <%= f.submit "-", class: "button" %>
+  <% end %>
+  
+  <%= cart_product.quantity %>
+
+  <%= form_for(:product, url: increment_cart_quantity_cart_path(id: cart_product.product.id), method: :post, remote: true) do |f| %>
+    <%= f.submit "+", class: "button" %>
+  <% end %>
+
