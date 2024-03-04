@@ -7,6 +7,13 @@ class SubcategoriesController < ApplicationController
     #   format.js # Render a JavaScript response (products.js.erb)
     # end
     # render 'products.js.erb'
+
+
+    if user_signed_in?
+      @cart = current_user.cart || current_user.build_cart
+    else
+      @cart = Cart.new(session[:cart])
+    end
   end
 
 end

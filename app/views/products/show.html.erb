@@ -22,18 +22,13 @@
       <h4><%= @product.name %></h4>
       <p><%= @product.weight %> grams</p>
       <h4><%= number_to_currency(@product.price, unit: '₹') %></h4>
-
       <div id="quantity-buttons-<%= @product.id %>">
         <% if @cart.cart_products.where(product_id: @product.id).exists? %>
           <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: @product.id), product: @product } %>
-        <% else %>
-          <% if @cart %>
-            <%= form_for(@product, url: add_to_cart_cart_path(product_id: @product.id), method: :post, remote: true) do |f| %>          
+          <% else %>
+          <%= form_for @product, url: add_to_cart_carts_path(product_id: @product.id), method: :post, remote: true do |f| %>
               <%= f.hidden_field :product_id, value: @product.id %>
               <%= f.submit "Add", class: "button" %>
-            <% end %>
-          <% else %>
-            <!-- Handle case where cart is not available -->
           <% end %>
         <% end %>
       </div>

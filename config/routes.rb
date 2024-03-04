@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   resources :carts do
     post 'add_to_cart/:product_id', action: :add_to_cart, as: :add_to_cart, on: :collection
-
     post 'increment_cart_quantity', on: :member
     post 'decrement_cart_quantity', on: :member
   end

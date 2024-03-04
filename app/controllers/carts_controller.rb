@@ -1,10 +1,10 @@
 class CartsController < ApplicationController
+  before_action :set_cart, only: [:show, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity]
   before_action :authenticate_user!
-  before_action :set_cart, only: [:show, :add_to_cart,:increment_cart_quantity, :decrement_cart_quantity]
 
   def show
     @products_in_cart = @cart.cart_products.includes(:product)
-    @products_in_cart = CartProduct.all  
+    @products_in_cart = CartProduct.all
   end
 
   def add_to_cart
@@ -27,18 +27,20 @@ class CartsController < ApplicationController
     render 'add_to_cart'
   end
 
- 
-
   def decrement_cart_quantity
-    @cart_product = CartProduct.find(params[:id])
+    @product = Product.find(params[:id])
+    @cart_product = @cart.cart_products.find_by(product_id: @product.id)
+  
     if @cart_product.quantity > 1
-      @cart_product.quantity -= 1
+      @cart_product.decrement(:quantity)
       @cart_product.save
     else
       @cart_product.destroy
     end
+  
     render 'add_to_cart' 
   end
+
   private
 
   def set_cart
