@@ -14,14 +14,24 @@
         </div>
       <% end %>
       <div style="position: absolute; bottom: 20px; left: 70%; transform: translateX(-50%);">
-       <div id="quantity-buttons-<%= product.id %>">
-          <% if @cart.cart_products.where(product_id: product.id).exists? %>
-             <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: product.id), product: product } %>
+        <div id="quantity-buttons-<%= product.id %>">
+          <% if user_signed_in? %>
+            <% if @cart.cart_products.where(product_id: product.id).exists? %>
+              <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: product.id), product: product } %>
             <% else %>
-             <%= form_for product, url: add_to_cart_carts_path(product_id: product.id), method: :post, remote: true do |f| %>
+              <%= form_for product, url: add_to_cart_carts_path(product_id: product.id), method: :post, remote: true do |f| %>
                 <%= f.hidden_field :product_id, value: product.id %>
                 <%= f.submit "Add", class: "button" %>
-             <% end %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <% if session[:cart] && session[:cart][product.id] %>
+              <%= render partial: 'carts/quantity_buttons', locals: { quantity: session[:cart][product.id], product: product } %>
+            <% else %>
+              <%= form_tag add_to_cart_carts_path(product_id: product.id), method: :post, remote: true do %>
+                <%= submit_tag "Add", class: "button" %>
+              <% end %>
+            <% end %>
           <% end %>
         </div>
       </div>

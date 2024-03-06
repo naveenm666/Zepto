@@ -1,0 +1,9 @@
+.B_1{
+    border: 1px solid #de0808;
+    background-color: #de0808;
+    color: #f9fffe;
+    font-size: .9rem;
+    font-weight: 600;
+    line-height: 30px;
+    margin: 10px;
+}

@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
       if user_signed_in?
         @cart = current_user.cart || current_user.build_cart
       else
-        @cart = Cart.new(session[:cart])
+        session[:cart] ||= {}
       end
 
     end

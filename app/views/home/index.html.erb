@@ -50,17 +50,27 @@
             </div>
           </div> 
         <% end %>
-        <div style="position: absolute; bottom: 20px; left: 70%; transform: translateX(-50%);">
-          <div id="quantity-buttons-<%= product.id %>">
-            <% if @cart.cart_products.where(product_id: product.id).exists? %>
-               <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: product.id), product: product } %>
-               <% else %>
+        <div style="position: absolute; bottom: 15px; left: 60%; transform: translateX(-50%);">
+           <div id="quantity-buttons-<%= product.id %>">
+            <% if user_signed_in? %>
+              <% if @cart.cart_products.where(product_id: product.id).exists? %>
+                <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: product.id), product: product } %>
+              <% else %>
                 <%= form_for product, url: add_to_cart_carts_path(product_id: product.id), method: :post, remote: true do |f| %>
                   <%= f.hidden_field :product_id, value: product.id %>
                   <%= f.submit "Add", class: "button" %>
-               <% end %>
+                <% end %>
+              <% end %>
+            <% else %>
+              <% if session[:cart] && session[:cart][product.id] %>
+                <%= render partial: 'carts/quantity_buttons', locals: { quantity: session[:cart][product.id], product: product } %>
+              <% else %>
+                <%= form_tag add_to_cart_carts_path(product_id: product.id), method: :post, remote: true do %>
+                  <%= submit_tag "Add", class: "button" %>
+                <% end %>
+              <% end %>
             <% end %>
-          </div>
+          </div>      
         </div>
       </div>
     <% end %>
@@ -98,7 +108,7 @@
   <div class="container">
     <% @products.each_slice(5) do |product_slice| %>
       <div class="row">
-        <%= product_slice.each do |product| %>
+        <% product_slice.each do |product| %>
           <div class="col-2 border border-2">
             <h5><strong><%= product.name %></strong></h5>
             <p>Price: <%= number_to_currency(product.price) %></p>

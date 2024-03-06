@@ -23,12 +23,23 @@
       <p><%= @product.weight %> grams</p>
       <h4><%= number_to_currency(@product.price, unit: '₹') %></h4>
       <div id="quantity-buttons-<%= @product.id %>">
-        <% if @cart.cart_products.where(product_id: @product.id).exists? %>
-          <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: @product.id), product: @product } %>
+        <% if user_signed_in? %>
+          <% if @cart.cart_products.where(product_id: @product.id).exists? %>
+            <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: @product.id), product: @product } %>
+          <% else %>
+            <%= form_for @product, url: add_to_cart_carts_path(product_id: @product.id), method: :post, remote: true do |f| %>
+              <%= f.hidden_field :@product_id, value: @product.id %>
+              <%= f.submit "Add", class: "button" %>
+            <% end %>
+          <% end %>
+         <% else %>
+          <% if session[:cart] && session[:cart][@product.id] %>
+            <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: @product.id), product: @product } %>
           <% else %>
           <%= form_for @product, url: add_to_cart_carts_path(product_id: @product.id), method: :post, remote: true do |f| %>
-              <%= f.hidden_field :product_id, value: @product.id %>
-              <%= f.submit "Add", class: "button" %>
+            <%= f.hidden_field :@product_id, value: @product.id %>
+            <%= submit_tag "Add", class: "button" %>
+            <% end %>
           <% end %>
         <% end %>
       </div>
