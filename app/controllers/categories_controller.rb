@@ -5,8 +5,8 @@ class CategoriesController < ApplicationController
     @subcategories = @category.subcategories
     @products = @category.products
     if user_signed_in?
-      @cart = current_user.cart || current_user.build_cart
-    else
+      @cart = current_user.cart || Cart.create!(user_id: current_user.id)
+      else
       session[:cart] ||= {}
     end
   end

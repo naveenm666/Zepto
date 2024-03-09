@@ -24,15 +24,26 @@
          </form>
      </div>
      <div class="col-md-3 login ">
-         <ul class="navbar-nav ms-auto">
-             <li class="nav-item ">
-             <a class="nav-link text-decoration-none", style: "color: white; " href="<%= new_user_session_path %>">Login</a>
-             </li>
-             <%= link_to "#", class: "btn btn-danger btn-lg text-decoration-none custom-btn", style: "color: white;width:170px;margin-left:20px;" do %>
-             <i class="bi bi-bag"></i>
+         <span class="navbar-nav ms-auto">
+            <% if current_user %>
+             <a class="nav-link text-decoration-none" style="color: white;" href="/account" data-bs-toggle="modal" data-bs-target="#profileModal">Profile</a>
+             <% else %>
+             <a class="nav-link text-decoration-none" style="color: white;" href="<%= new_user_session_path %>">Login</a>
+           <% end %>           
+           <% if current_user && current_user.cart.present? %>
+             <%= link_to carts_path, id: "my-cart-link", class: "btn btn-danger btn-lg text-decoration-none custom-btn", style: "color: white;width:170px;margin-left:20px;" do %>
+                <i class="bi bi-bag"></i>
                 <span>My Cart</span>
+              <% end %>
+             <% else %>
+              <%= link_to carts_path, class: "btn btn-danger btn-lg text-decoration-none custom-btn", style: "color: white;width:170px;margin-left:20px;" do %>
+                <i class="bi bi-person"></i>
+                <span>My cart</span>
+              <% end %>
             <% end %>
+          </span>
       </div>
     </nav>
   </div>
 </div>
+<%= render 'home/profile_modal' %>

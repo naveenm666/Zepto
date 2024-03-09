@@ -6,8 +6,8 @@ class HomeController < ApplicationController
     @initial_delivery_time = calculate_updated_delivery_time  
 
     if user_signed_in?
-      @cart = current_user.cart || current_user.build_cart
-    else
+      @cart = current_user.cart || Cart.create!(user_id: current_user.id)
+      else
       session[:cart] ||= {}
     end
   end

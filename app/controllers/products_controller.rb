@@ -9,8 +9,8 @@ class ProductsController < ApplicationController
     def show
       @product = Product.find(params[:id])
       if user_signed_in?
-        @cart = current_user.cart || current_user.build_cart
-      else
+        @cart = current_user.cart || Cart.create!(user_id: current_user.id)
+        else
         session[:cart] ||= {}
       end
 
@@ -18,11 +18,14 @@ class ProductsController < ApplicationController
 
     def all
       @products = Product.all.page(params[:page]).per(30)
+      if user_signed_in?
+        @cart = current_user.cart || Cart.create!(user_id: current_user.id)
+        else
+        session[:cart] ||= {}
+      end
     end
 
 
-  
-    
     private
   
     def set_product

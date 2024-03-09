@@ -22,8 +22,6 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
-  resource :cart, only: [:show]
-
 
 # config/routes.rb
   resources :subcategories do

@@ -2,13 +2,23 @@ class CartsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity]
   before_action :set_cart, only: [:show, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity]
 
-  def show
+  def index
     if user_signed_in?
-      @products_in_cart = @cart.cart_products.includes(:product)
+      @cart = current_user.cart || Cart.create!(user_id: current_user.id)
+      if @cart.cart_products.empty?
+        # If the cart is empty, set @products_in_cart to nil
+        @products_in_cart = nil
+      else
+        # If the cart is not empty, load the cart products
+        @products_in_cart = @cart.cart_products.includes(:product)
+      end
     else
+      # Handle session cart for guest users (if needed)
       @cart_products = session[:cart] || {}
     end
   end
+
+  
 
   def add_to_cart
     if user_signed_in?
@@ -134,8 +144,7 @@ class CartsController < ApplicationController
 
   def set_cart
     if user_signed_in?
-      @cart = current_user.cart || current_user.build_cart
-    else
+      @cart = current_user.cart || Cart.create!(user_id: current_user.id)    else
       session[:cart] ||= {}
     end
   end
