@@ -1,21 +1,32 @@
-<h1 style="margin-top:200px;"></h1>
+<h1 style="margin-top:100px;"></h1>
 
-<%= render 'carts/cart_navbar' %>
 <% if @products_in_cart.present? %>
-<!-- Add navigation bar -->
+  <!-- Add navigation bar -->
   <!-- Render products in the cart -->
   <% @products_in_cart.each do |cart_product| %>
     <!-- Render cart product details here -->
   <% end %>
- <% else %>
+<% elsif current_user %>
+  <!-- If user is logged in but cart is empty -->
   <h1 style="margin-top:200px;"></h1>
   <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <img src="https://cdn.zeptonow.com/app/images/empty-bag.png?tr=w-640,q-70" alt="Empty bag" width="48" height="48">
-      <p>Your cart is empty</p>
-      <%= link_to "Browse Products", root_path, class: "btn btn-outline-danger text-decoration-none"  %>
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <img src="https://cdn.zeptonow.com/app/images/empty-bag.png?tr=w-640,q-70" alt="Empty bag" width="48" height="48">
+        <p>Your cart is empty</p>
+        <%= link_to "Browse Products", root_path, class: "btn btn-outline-danger text-decoration-none"  %>
+      </div>
     </div>
   </div>
+<% else %>
+  <!-- If user is not logged in -->
+  <h1 style="margin-top:200px;"></h1>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <p>Please log in to view your cart</p>
+        <%= link_to "Login",new_user_session_path, class: "btn btn-outline-primary text-decoration-none"  %>
+      </div>
+    </div>
   </div>
 <% end %>

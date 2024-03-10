@@ -22,18 +22,18 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
-
-# config/routes.rb
   resources :subcategories do
     get 'products', on: :member
   end
-
 
   resources :categories do
     resources :subcategories do
       get 'products', on: :member
     end
   end
+
+  get '/account', to: 'home#profile', as: 'account'
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

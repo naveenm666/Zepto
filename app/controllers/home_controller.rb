@@ -11,6 +11,10 @@ class HomeController < ApplicationController
       session[:cart] ||= {}
     end
   end
+
+  def profile
+    # add logic here if needed
+  end
   
 
   def update_delivery_time

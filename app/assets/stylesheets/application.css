@@ -17,7 +17,7 @@
  @import "jquery-ui.css";
 
 .bg-skin-primary-darker {
-    background-color: rgb(66, 21, 101); 
+    background-color: rgb(160, 227, 239); 
 }
 
 .dropdown {
@@ -33,11 +33,6 @@
 
 }
 
-.login {
-   font-size: 25px;
-   padding-left: 150px;
-   text-decoration: none;
-}
 
 .avater {
     padding-left: 50px;

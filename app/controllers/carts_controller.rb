@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity]
-  before_action :set_cart, only: [:show, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity]
+  before_action :authenticate_user!, except: [:index, :show, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity]
+  before_action :set_cart, only: [:show, :index, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity]
 
   def index
     if user_signed_in?
@@ -18,6 +18,9 @@ class CartsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   
 
   def add_to_cart
@@ -28,25 +31,11 @@ class CartsController < ApplicationController
 
       @quantity = @cart_product.quantity
     else
-          # Find the product
       @product = Product.find(params[:product_id])
-
-      # Ensure the session cart is initialized
       session[:cart] ||= {}
-
-      # Find or create the cart_product for the current product
-      session[:cart][@product.id] ||= {}
-      session[:cart][@product.id][:quantity] ||= 0
-      session[:cart][@product.id][:quantity] += 1
-
-      # Find or create the cart_product for the current product
-      cart_product = CartProduct.find_or_create_by(product: @product)
-
-      # Optionally, update the @quantity variable with the new value for display
-      @quantity = session[:cart][@product.id][:quantity]
-
-      # Render the appropriate view or template
-      render 'add_to_cart'
+      session[:cart][@product.id] ||= 0
+      session[:cart][@product.id] += 1
+      @quantity = session[:cart][@product.id]
     end
 
     respond_to do |format|
@@ -62,33 +51,15 @@ class CartsController < ApplicationController
       @cart_product.increment!(:quantity)
       @quantity = @cart_product.quantity
       @cart_product.reload
-      render 'add_to_cart'
     else
-        # Find the product
       @product = Product.find(params[:id])
-
-      # Ensure the session cart is initialized
       session[:cart] ||= {}
-
-      # Find or create the cart_product for the current product
-      session[:cart][@product.id] ||= {}
-      session[:cart][@product.id][:quantity] ||= 0
-      session[:cart][@product.id][:quantity] += 1
-
-      # Find or create the cart_product for the current product
-      cart_product = CartProduct.find_or_create_by(product: @product)
-
-      # Increment the quantity of the cart_product
-      session[:cart][@product.id][:cart_product] ||= cart_product
-      session[:cart][@product.id][:cart_product].quantity ||= 0
-      session[:cart][@product.id][:cart_product].quantity += 1
-
-      # Update @quantity with the new value for display
-      @quantity = session[:cart][@product.id][:quantity]
-
-      # Render the appropriate view or template
-      render 'add_to_cart'
+      session[:cart][@product.id] ||= 0
+      session[:cart][@product.id] += 1
+      @quantity = session[:cart][@product.id]
     end
+    render 'add_to_cart'
+    
   end
   
 
@@ -108,36 +79,16 @@ class CartsController < ApplicationController
     
       render 'add_to_cart'
     else
-      # Find the product
       @product = Product.find(params[:id])
-
-      # Ensure the session cart is initialized
       session[:cart] ||= {}
-    
-      # Decrement the quantity in the session cart
-      session[:cart][@product.id] ||= {}
-      session[:cart][@product.id][:quantity] ||= 0
-      session[:cart][@product.id][:quantity] -= 1 if session[:cart][@product.id][:quantity] > 0
-    
-      # Find the cart_product for the current product
-      cart_product = CartProduct.find_by(product: @product)
-    
-      # Ensure that the cart_product exists and its quantity is properly initialized
-      if cart_product
-        cart_product.quantity ||= 0
-    
-        # Decrement the quantity of the cart_product
-        cart_product.quantity -= 1 if cart_product.quantity > 0
-    
-        # Save the changes to the cart_product
-        cart_product.save
+      session[:cart][@product.id] ||= 0
+      if session[:cart][@product.id] > 0
+        session[:cart][@product.id] -= 1
+        @quantity = session[:cart][@product.id]
+      else
+        @quantity = 0
       end
-    
-      # Update @quantity with the new value for display
-      @quantity = session[:cart][@product.id][:quantity]
-    
-      # Render the appropriate view or template
-      render 'add_to_cart'
+     render 'add_to_cart'
     end
   end
   private
