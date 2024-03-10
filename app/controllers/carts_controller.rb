@@ -19,6 +19,7 @@ class CartsController < ApplicationController
   end
 
   def show
+    # Assuming current_user.cart.products returns the collection of products in the user's cart
   end
 
   
@@ -58,7 +59,6 @@ class CartsController < ApplicationController
       session[:cart][@product.id] += 1
       @quantity = session[:cart][@product.id]
     end
-    render 'add_to_cart'
     
   end
   

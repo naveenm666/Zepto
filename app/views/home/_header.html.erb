@@ -28,10 +28,14 @@
             </div>
           </div>
           <!-- Link to trigger modal -->
+          <div style="width:20%;">
+          <h5 id="delivery-time" class="mb-1">Delivery in <%= @initial_delivery_time %></h5>
+
           <a href="#" id="exampleModalLink" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Address <i class="fas fa-caret-down"></i>
           </a>
-          <form class="d-flex" style="margin-left:200px;">
+          </div>
+          <form class="d-flex" style="margin-left:50px;">
               <input class="form-control me-2" type="search" placeholder="Search for over 5000 products" aria-label="Search">
             </form>
         <% else %>
@@ -45,15 +49,15 @@
         <span class="navbar-nav ms-auto" style="font-size:15px;">
             <% if current_user %>
               <% unless params[:controller] == 'home' && params[:action] == 'profile' %>    
-                <a class="nav-link text-decoration-none" style="color: white;margin-left:10px;" href="<%= account_path %>" >Profile</a>
+                <a class="nav-link text-decoration-none" style="color: black;margin-left:10px;" href="<%= account_path %>" >Profile</a>
               <% end %> 
             <% else %>
-              <a class="nav-link text-decoration-none" style="color: white;" href="<%= new_user_session_path %>">Login</a>
+              <a class="nav-link text-decoration-none" style="color: black;" href="<%= new_user_session_path %>">Login</a>
           <% end %>    
           <% if params[:controller] != 'carts' %>       
             <% if current_user && current_user.cart.present?  %>
               <%= link_to carts_path, id: "my-cart-link"  do %>
-              <div style="color: white;margin-left:10px;">
+              <div style="color: black;margin-left:10px;">
                 <img src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/10.0.7/images/header/cart.svg" alt="cart" width="24px" height="24px" class="d-inline-block align-center">
                 <span class="text-sm">cart</span>
               <% end %>

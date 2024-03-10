@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     @categories = Category.all
     @initial_delivery_time = calculate_updated_delivery_time  
 
+
     if user_signed_in?
       @cart = current_user.cart || Cart.create!(user_id: current_user.id)
       else

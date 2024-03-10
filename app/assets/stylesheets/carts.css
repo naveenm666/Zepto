@@ -11,3 +11,10 @@
 .bg-skyblue {
     background-color: rgb(146, 227, 234);
   }
+
+.row.bg-blue {
+    background-color: rgb(71, 14, 86);
+    max-height: 100%;
+    overflow-y: auto;
+    margin-top: 90px;
+    }
