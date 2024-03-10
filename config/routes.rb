@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   resources :carts do
     post 'add_to_cart/:product_id', action: :add_to_cart, as: :add_to_cart, on: :collection
-
     post 'increment_cart_quantity', on: :member
     post 'decrement_cart_quantity', on: :member
   end
@@ -23,20 +22,18 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
-  resource :cart, only: [:show]
-
-
-# config/routes.rb
   resources :subcategories do
     get 'products', on: :member
   end
-
 
   resources :categories do
     resources :subcategories do
       get 'products', on: :member
     end
   end
+
+  get '/account', to: 'home#profile', as: 'account'
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

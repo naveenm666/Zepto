@@ -1,24 +1,46 @@
-<div class="container">
-   <div class="header" style="padding-top: 100px;">
-      <h5 class="mb-2">Products For You</h5>
-   </div>
-   <div class="products-container scrollbar">
-     <% @products.each_slice(5) do |product_group| %>
-       <div class="row justify-content-between align-items-stretch">
-         <% product_group.each do |product| %>
-           <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-             <div class="card product-container" style="width: 275px; height: 300px;"> <!-- Fixed height added -->
-               <a href="<%= product_path(product) %>" class="d-flex flex-column h-100">
-                 <div class="card-body">
-                   <h5 class="card-title" style="font-size: 16px;"><strong><%= product.name %></strong></h5> <!-- Decreased font size -->
-                   <p class="card-text" style="font-size: 14px;"><%= product.weight %>grms</p> <!-- Decreased font size -->
-                   <h5 class="card-text" style="font-size: 16px;"><strong><%= number_to_currency(product.price, unit: '₹') %></strong></h5> <!-- Decreased font size -->
-                 </div>
-               </a>
-             </div>
-           </div>
-         <% end %>
-       </div>
-     <% end %>
-   </div>
+
+<div class="container" style="margin-top:100px;">
+  <h1>Products</h1>
+  <% @products.each_slice(5) do |products_slice| %>
+    <div class="row">
+      <% products_slice.each do |product| %>
+        <div class="col mr-2" style="position: relative; width: 180px; margin-top:20px;">
+          <%= link_to product_path(product) do %>
+            <div class="card" style="width: 210px; height: 250px; position: relative;">
+              <div class="card-body" style="overflow: hidden; text-overflow: ellipsis; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);">
+                <h5 class="card-title" style="font-size: 16px; white-space: normal;"><strong><%= product.name %></strong></h5>
+                <p class="card-text" style="font-size: 14px;"><%= product.weight %>grms</p>
+                <div style="display: flex; align-items: center;">
+                  <h5 class="card-text" style="font-size: 16px;"><strong><%= number_to_currency(product.price, unit: '₹') %></strong></h5>
+                </div>
+              </div>
+            </div> 
+          <% end %>
+          <div style="position: absolute; bottom: 15px; left: 60%; transform: translateX(-50%);">
+            <div id="quantity-buttons-<%= product.id %>">
+              <% if user_signed_in? %>
+                <% if @cart.cart_products.where(product_id: product.id).exists? %>
+                  <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: product.id), product: product } %>
+                <% else %>
+                  <%= form_for product, url: add_to_cart_carts_path(product_id: product.id), method: :post, remote: true do |f| %>
+                    <%= f.hidden_field :product_id, value: product.id %>
+                    <%= f.submit "Add", class: "button" %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <% if session[:cart] && session[:cart][product.id] %>
+                  <%= render partial: 'carts/quantity_buttons', locals: { quantity: session[:cart][product.id], product: product } %>
+                <% else %>
+                  <%= form_tag add_to_cart_carts_path(product_id: product.id), method: :post, remote: true do %>
+                    <%= submit_tag "Add", class: "button" %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>      
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
+

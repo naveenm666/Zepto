@@ -2,36 +2,74 @@
 <div class="row">
   <nav class="navbar navbar-expand-lg navbar-light bg-skin-primary-darker fixed-top" style="height: 90px;">
       <div class="col-md-1">
-         <a class="avater" href="#">
-             <img alt="" src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/7.0.3/images/logo.svg" width="105" height="35" decoding="async" data-nimg="1" class="relative overflow-hidden false max-w-none" loading="lazy" style="color: transparent; object-fit: contain">
+        <a class="avatar" href="<%= root_path %>">
+          <img src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/10.0.7/images/header/primary-logo.svg" alt="Zepto Logo" width="90" height="30" class="d-inline-block align-bottom" style="margin-left:60px;">
          </a>
-     </div>
-     <div class="col-md-2">
-         <div class="dropdown">
-             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                 Dropdown <i class="fas fa-caret-down"></i>
-             </button>
-             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                 <a class="dropdown-item" href="#">Action</a>
-                 <a class="dropdown-item" href="#">Another action</a>
-                 <a class="dropdown-item" href="#">Something else here</a>
-             </div>
-         </div>
-     </div>
-     <div class="col-md-6">
-         <form class="d-flex">
-             <input class="form-control me-2" type="search" placeholder="Search for over 5000 products" aria-label="Search">
-         </form>
-     </div>
-     <div class="col-md-3 login ">
-         <ul class="navbar-nav ms-auto">
-             <li class="nav-item ">
-             <a class="nav-link text-decoration-none", style: "color: white; " href="<%= new_user_session_path %>">Login</a>
-             </li>
-             <%= link_to "#", class: "btn btn-danger btn-lg text-decoration-none custom-btn", style: "color: white;width:170px;margin-left:20px;" do %>
-             <i class="bi bi-bag"></i>
-                <span>My Cart</span>
+      </div>
+      <div class="col-md-10 d-flex justify-content-between align-items-center">
+        <% if params[:controller] != 'carts' %>
+          <!-- Bootstrap Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Dropdown</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Link to trigger modal -->
+          <div style="width:20%;">
+          <h5 id="delivery-time" class="mb-1">Delivery in <%= @initial_delivery_time %></h5>
+
+          <a href="#" id="exampleModalLink" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Address <i class="fas fa-caret-down"></i>
+          </a>
+          </div>
+          <form class="d-flex" style="margin-left:50px;">
+              <input class="form-control me-2" type="search" placeholder="Search for over 5000 products" aria-label="Search">
+            </form>
+        <% else %>
+        <!-- Full column for search -->
+          <form class="col-md-10 d-flex justify-content-between align-items-center" style="margin-left:50px;width:1550px;">
+            <input class="form-control me-2" type="search" placeholder="Search for over 5000 products" aria-label="Search">
+          </form>
+        <% end %>
+      </div>
+      <div class="col-md-1 login ">
+        <span class="navbar-nav ms-auto" style="font-size:15px;">
+            <% if current_user %>
+              <% unless params[:controller] == 'home' && params[:action] == 'profile' %>    
+                <a class="nav-link text-decoration-none" style="color: black;margin-left:10px;" href="<%= account_path %>" >Profile</a>
+              <% end %> 
+            <% else %>
+              <a class="nav-link text-decoration-none" style="color: black;" href="<%= new_user_session_path %>">Login</a>
+          <% end %>    
+          <% if params[:controller] != 'carts' %>       
+            <% if current_user && current_user.cart.present?  %>
+              <%= link_to carts_path, id: "my-cart-link"  do %>
+              <div style="color: black;margin-left:10px;">
+                <img src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/10.0.7/images/header/cart.svg" alt="cart" width="24px" height="24px" class="d-inline-block align-center">
+                <span class="text-sm">cart</span>
+              <% end %>
+              </div>
+             <% else %>
+              <%= link_to carts_path do %>
+                <img src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/10.0.7/images/header/cart.svg" alt="cart" width="24px" height="24px" class="d-inline-block align-center">
+                <span class="text-sm">cart</span>
+              <% end %>
             <% end %>
+          <% end %>
+        </span>
       </div>
     </nav>
   </div>
