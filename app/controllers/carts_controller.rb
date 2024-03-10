@@ -59,7 +59,8 @@ class CartsController < ApplicationController
       session[:cart][@product.id] += 1
       @quantity = session[:cart][@product.id]
     end
-    
+    render 'add_to_cart'
+
   end
   
 

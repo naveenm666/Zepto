@@ -1,6 +1,6 @@
 .B_1{
-    border: 1px solid #de0808;
     background-color: #de0808;
+    border: 1px solid #de0808;
     color: #f9fffe;
     font-size: .9rem;
     font-weight: 600;
@@ -15,6 +15,6 @@
 .row.bg-blue {
     background-color: rgb(71, 14, 86);
     max-height: 100%;
-    overflow-y: auto;
     margin-top: 90px;
-    }
+    overflow-y: auto;
+ }
