@@ -1,4 +1,3 @@
-
 <%= form_for(:product, url: decrement_cart_quantity_cart_path(id: product.id), method: :post, remote: true) do |f| %> 
     <%= f.submit "-", class: "button" %>
   <% end %>

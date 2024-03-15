@@ -4,6 +4,10 @@ class HomeController < ApplicationController
     @products = Product.all
     @categories = Category.all
     @initial_delivery_time = calculate_updated_delivery_time  
+    @resource = User.new
+    @devise_mapping = Devise.mappings[:user]
+
+
 
 
     if user_signed_in?

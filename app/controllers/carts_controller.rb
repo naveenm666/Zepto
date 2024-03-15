@@ -69,16 +69,18 @@ class CartsController < ApplicationController
       @product = Product.find(params[:id])
       @cart_product = @cart.cart_products.find_by(product_id: @product.id)
     
-      if @cart_product.quantity > 1
-        @cart_product.decrement(:quantity)
-        @quantity = @cart_product.quantity
-
-        @cart_product.save
-      else
-        @cart_product.destroy
-      end
-    
+      if @cart_product.present?
+        if @cart_product.quantity > 1
+          # If quantity is greater than 1, decrement the quantity
+          @cart_product.decrement(:quantity)
+          @quantity = @cart_product.quantity
+          @cart_product.save
+        else
+          # If quantity is 1 or less, destroy the cart product
+          @cart_product.destroy
+        end
       render 'add_to_cart'
+      end
     else
       @product = Product.find(params[:id])
       session[:cart] ||= {}
