@@ -1,0 +1,149 @@
+<h1 style="margin-top:90px;"></h1>
+
+<% if @products_in_cart.present? %>
+  
+<div class="container-fluid" style="padding-left:0px; padding-right:0px;">
+  <!-- Add navigation bar -->
+  <!-- Render products in the cart -->
+  <% total_items = 0 %>
+  <% @products_in_cart.each do |cart_product| %>
+    <!-- Render cart product details here -->
+    <% total_items += cart_product.quantity %>
+    <% if cart_product.quantity.zero? %>
+    <!-- If the quantity is zero, remove the product from the cart -->
+    <% puts "Deleting product #{cart_product.id} because quantity is zero" %>
+
+    <% cart_product.destroy %>
+  <% end %>
+  <% end %>
+  
+  <div class="container C_2">
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col"> <!-- This column will contain the cart title -->
+        <h5>Cart(<%= total_items %> items)</h5>
+      </div>
+      <div class="col-3"> <!-- This column will contain the "Add More" button -->
+        <%= link_to "AddMore", root_path, class: "btn btn-primary text-decoration-none"  %>
+      </div>
+    </div>
+  </div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-5 C_1">
+      <div class="card n_1 border-0">
+        <div class="card-body">
+          <% total_order_price = 0 %>
+          <% handling_charge_discounted = 5.49 %>
+          <% handling_charge = 15 %>
+          <% delivery_charge = 25 %>
+          <% small_cart_fee = 35 %>
+
+          <% @products_in_cart.each_with_index do |cart_product, index| %>
+            <% product = cart_product.product %>
+            <div class="product-details row">
+              <div class="col-md-9">
+                <p class="card-title"><%= product.name %></p>
+                <p class="card-text">Price: <%= product.price %></p>
+                <!-- Add more details as needed -->
+              </div>
+              <div class="col-md-3"style="padding-right:50px">
+                <!-- Add the add-to-cart button here -->
+                <div id="quantity-buttons-<%= product.id %>">
+                <% if @cart.cart_products.where(product_id: product.id).exists? %>
+                <%= render partial: 'carts/quantity_buttons', locals: { cart_product: cart_product, product: product } %>
+                <% end %>
+                </div>
+              </div>
+            </div>
+            <% item_price = product.price * cart_product.quantity %>
+            <% total_order_price += item_price %>
+            <% if index < @products_in_cart.size - 1 %>
+              <hr> 
+            <% end %>
+          <% end %>
+          <br>
+        </div>
+      </div>
+      <div class="card n_1 border-0 mt-3">
+        <div class="card-body">
+        </div>
+      </div>  
+    </div>
+    <div class="col-6">
+      <div class="card n_2">
+        <div class="card-content">
+          <h2>offers for you</h2>
+        </div>
+      </div>
+      <div class="card n_2 mt-3 " style="font-size: 14px;">
+        <div class="card-content m-3">
+           <div class="row"><p class="col-9 ">Item total </p><p class="col-3">₹<%= number_to_currency(total_order_price, unit: '') %></p></div>
+           <div class="row"><p class="col-9 ">Handling Charges :</p><p class="col-3"><s>₹<%= handling_charge %></s><span style="color: green;">₹<%= handling_charge_discounted %></span></p></div>
+           <% if total_order_price + handling_charge_discounted < 100 %>
+              <% total_order_price += small_cart_fee %>
+              <% total_order_price += delivery_charge %>
+              <div class="row">
+                <p class="col-9">Small Cart Fee:</p>
+                <p class="col-3">₹<%= number_to_currency(small_cart_fee.round, unit: '') %></p> <!-- Round to the nearest integer for display -->
+              </div>
+              <div class="row">
+                <p class="col-9">Delivery fee:</p>
+                <p class="col-3">₹<%= number_to_currency(delivery_charge.round, unit: '') %></p> <!-- Round to the nearest integer for display -->
+                <div class="row" style="color: green;">
+                  <p class="col-9">Add ₹<%= 99 - (total_order_price + handling_charge_discounted) %> more to avoid delivery charge.</p>
+                </div>
+              </div>
+            <% else %>
+              <div class="row">
+                <p class="col-9">Delivery fee:</p>
+                <p class="col-3"><s>₹<%= delivery_charge %></s><span style="color: green;">₹0</span></p>
+              </div>
+            <% end %>
+           <div class="row"><p class="col-9">TO PAY</p><p class="col-3"> ₹<%= number_to_currency(total_order_price+ handling_charge_discounted , unit: '') %></p></div>
+        </div>
+        <hr> 
+      </div>
+      <div class="card n_2 mt-3">
+        <div class="card-content m-3">
+          <p class="text-center">Enter your delivery address</p>
+          <%= render 'addresses/address_modal' %>
+          <div class="row justify-content-center m-3">
+            <button id="exampleModalLink" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addressModal">
+              Add Address To Proceed
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<% elsif current_user %>
+  <!-- If user is logged in but cart is empty -->
+  <h1 style="margin-top:200px;"></h1>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <img src="https://cdn.zeptonow.com/app/images/empty-bag.png?tr=w-640,q-70" alt="Empty bag" width="48" height="48">
+        <p>Your cart is empty</p>
+        <%= link_to "Browse Products", root_path, class: "btn btn-outline-danger text-decoration-none"  %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <!-- If user is not logged in -->
+  <h1 style="margin-top:200px;"></h1>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <p>Please log in to view your cart</p>
+        <%= link_to "Login",new_user_session_path, class: "btn btn-outline-primary text-decoration-none"  %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -16,6 +16,7 @@ class CartsController < ApplicationController
       # Handle session cart for guest users (if needed)
       @cart_products = session[:cart] || {}
     end
+
   end
 
   def show
@@ -94,6 +95,19 @@ class CartsController < ApplicationController
      render 'add_to_cart'
     end
   end
+
+
+  def remove_from_cart
+    # Your logic to remove an item from the cart
+    # For example:
+    @cart_product = CartProduct.find(params[:cart_product_id])
+    @cart_product.destroy
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   private
 
   def set_cart

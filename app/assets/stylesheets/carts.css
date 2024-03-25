@@ -3,10 +3,18 @@
     border: 1px solid #de0808;
     color: #f9fffe;
     font-size: .9rem;
-    font-weight: 600;
-    line-height: 30px;
-    margin: 10px;
+    line-height: 35px;
+    border-radius: 5px;
 }
+.custom-button{
+  background-color: #de0808;
+  border: none;
+  font-size: 18px;
+  line-height: 30px;
+  color:  #f9fffe;
+
+}
+
 
 .bg-skyblue {
     background-color: rgb(146, 227, 234);
