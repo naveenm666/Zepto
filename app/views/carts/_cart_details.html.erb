@@ -107,15 +107,29 @@
         <hr> 
       </div>
       <div class="card n_2 mt-3">
-        <div class="card-content m-3">
-          <p class="text-center">Enter your delivery address</p>
-          <%= render 'addresses/address_modal' %>
-          <div class="row justify-content-center m-3">
-            <button id="exampleModalLink" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addressModal">
-              Add Address To Proceed
-            </button>
-          </div>
+      <div class="card-content m-3">
+      
+      
+      <% if current_user.addresses.present? %>
+        <!-- Display existing address -->
+        <%= render 'addresses/existing_address', address: current_user.addresses.last %>
+        <%= render 'addresses/change_address_modal' ,{address: current_user.addresses.new} %>
+        <span id="changeAddress" data-bs-toggle="modal" data-bs-target="#addressModal">CHANGE</span>
+        <div class="row justify-content-center m-3">
+          <button class="btn btn-danger" >
+            Make Payment
+          </button>
+      <% else %>
+        <!-- Display address modal form -->
+        <p class="text-center">Enter your delivery address</p>
+        <%= render 'addresses/address_modal' ,{address: current_user.addresses.new} %>
+        <div class="row justify-content-center m-3">
+          <button id="exampleModalLink" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addressModal2">
+            Add Address To Proceed
+          </button>
         </div>
+      <% end %>
+    </div>
       </div>
     </div>
   </div>

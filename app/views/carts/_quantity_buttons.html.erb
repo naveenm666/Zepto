@@ -1,5 +1,4 @@
-<div class="row B_1" style="margin-right: 0px";
->
+<div class="row B_1" style="margin-right: 0px";>
   <div class="col-1" style="padding-left:8px">
     <%= form_for(:product, url: decrement_cart_quantity_cart_path(id: product.id), method: :post, remote: true) do |f| %> 
       <%= f.submit "-", class: "custom-button" %>

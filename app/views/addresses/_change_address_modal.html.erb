@@ -1,9 +1,35 @@
-<!-- Modal for delivery address -->
-<div class="modal fade" id="addressModal2" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document" >
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="addressModalLabel">Enter Delivery Address</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Your modal body content -->
+        <%= render 'addresses/address_modal' ,{address: current_user.addresses.new} %>
+        <div class="row justify-content-center m-3">
+          <button id="exampleModalLink" type="button" class="btn btn-danger" onclick="openSecondModal()">
+            Add Address To Proceed
+          </button>
+        </div>
+        <% current_user.addresses.each do |address| %>
+          <p class="address-item" data-address-id="<%= address.id %>">
+            <%= address.current_location %>, <%= address.house_no %>, <%= address.address_type %>, <%= address.landmark %>
+          </p>
+        <% end %>        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Second Bootstrap Modal -->
+<div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="secondModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="secondModalLabel">Enter Delivery Address</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -55,4 +81,19 @@
       </div>
     </div>
   </div>
+
+</div>
+
+<!-- Inline JavaScript -->
+<div style="display: none;">
+  <script>
+    function openSecondModal() {
+      // Close the first modal
+      document.getElementById('addressModal').classList.remove('show');
+      document.getElementById('addressModal').style.display = 'none';
+      // Open the second modal
+      document.getElementById('secondModal').classList.add('show');
+      document.getElementById('secondModal').style.display = 'block';
+    }
+  </script>
 </div>

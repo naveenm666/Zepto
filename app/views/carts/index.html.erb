@@ -4,6 +4,5 @@
   </div>
 </div>
 <div class="container" id="cart-details">
-    <%= render(:partial => 'cart_details') %>
-  </div>
+  <%= render partial: 'cart_details', locals: { cart: @cart } %>
 </div>

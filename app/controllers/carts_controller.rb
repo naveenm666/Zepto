@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity]
-  before_action :set_cart, only: [:show, :index, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity]
+  before_action :authenticate_user!, except: [:index, :show, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity, :update_cart_details]
+  before_action :set_cart, only: [:show, :index, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity, :update_cart_details]
 
   def index
     if user_signed_in?
@@ -15,6 +15,10 @@ class CartsController < ApplicationController
     else
       # Handle session cart for guest users (if needed)
       @cart_products = session[:cart] || {}
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js # index.js.erb
     end
 
   end
@@ -105,6 +109,15 @@ class CartsController < ApplicationController
     
     respond_to do |format|
       format.js
+    end
+  end
+
+  def update_cart_details
+    @cart = current_user.cart
+    # Logic to update cart details...
+  
+    respond_to do |format|
+      format.js # This will render update_cart_details.js.erb
     end
   end
   
