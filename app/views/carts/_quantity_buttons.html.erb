@@ -1,13 +1,15 @@
-
-<%= form_for(:product, url: decrement_cart_quantity_cart_path(id: product.id), method: :post, remote: true) do |f| %> 
-    <%= f.submit "-", class: "button" %>
-  <% end %>
-  
-  <%= @quantity || cart_product.quantity %>
-
-  <%= form_for(:product, url: increment_cart_quantity_cart_path(id: product.id), method: :post, remote: true) do |f| %>
-    <%= f.submit "+", class: "button" %>
-  <% end %>
-
-
-  
+<div class="row B_1" style="margin-right: 0px";>
+  <div class="col-1" style="padding-left:8px">
+    <%= form_for(:product, url: decrement_cart_quantity_cart_path(id: product.id), method: :post, remote: true) do |f| %> 
+      <%= f.submit "-", class: "custom-button" %>
+    <% end %>
+  </div>
+  <div class="col-1" style="padding-left:18px">
+    <%= @quantity || cart_product.quantity %>
+  </div>
+  <div class="col-1" style="padding-left:8px">
+    <%= form_for(:product, url: increment_cart_quantity_cart_path(id: product.id), method: :post, remote: true) do |f| %>
+      <%= f.submit "+", class: "custom-button" %>
+    <% end %>
+  </div>
+</div>

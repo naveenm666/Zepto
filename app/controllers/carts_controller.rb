@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity]
-  before_action :set_cart, only: [:show, :index, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity]
+  before_action :authenticate_user!, except: [:index, :show, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity, :update_cart_details]
+  before_action :set_cart, only: [:show, :index, :add_to_cart, :increment_cart_quantity, :decrement_cart_quantity, :update_cart_details]
 
   def index
     if user_signed_in?
@@ -16,6 +16,11 @@ class CartsController < ApplicationController
       # Handle session cart for guest users (if needed)
       @cart_products = session[:cart] || {}
     end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js # index.js.erb
+    end
+
   end
 
   def show
@@ -69,16 +74,18 @@ class CartsController < ApplicationController
       @product = Product.find(params[:id])
       @cart_product = @cart.cart_products.find_by(product_id: @product.id)
     
-      if @cart_product.quantity > 1
-        @cart_product.decrement(:quantity)
-        @quantity = @cart_product.quantity
-
-        @cart_product.save
-      else
-        @cart_product.destroy
-      end
-    
+      if @cart_product.present?
+        if @cart_product.quantity > 1
+          # If quantity is greater than 1, decrement the quantity
+          @cart_product.decrement(:quantity)
+          @quantity = @cart_product.quantity
+          @cart_product.save
+        else
+          # If quantity is 1 or less, destroy the cart product
+          @cart_product.destroy
+        end
       render 'add_to_cart'
+      end
     else
       @product = Product.find(params[:id])
       session[:cart] ||= {}
@@ -92,6 +99,28 @@ class CartsController < ApplicationController
      render 'add_to_cart'
     end
   end
+
+
+  def remove_from_cart
+    # Your logic to remove an item from the cart
+    # For example:
+    @cart_product = CartProduct.find(params[:cart_product_id])
+    @cart_product.destroy
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update_cart_details
+    @cart = current_user.cart
+    # Logic to update cart details...
+  
+    respond_to do |format|
+      format.js # This will render update_cart_details.js.erb
+    end
+  end
+  
   private
 
   def set_cart

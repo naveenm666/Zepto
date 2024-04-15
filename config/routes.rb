@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     post 'add_to_cart/:product_id', action: :add_to_cart, as: :add_to_cart, on: :collection
     post 'increment_cart_quantity', on: :member
     post 'decrement_cart_quantity', on: :member
+
+    collection do
+      patch :update_cart_details
+    end
   end
 
   get 'all_products', to: 'products#all', as: 'all_products'
@@ -33,6 +37,8 @@ Rails.application.routes.draw do
   end
 
   get '/account', to: 'home#profile', as: 'account'
+
+  resources :addresses
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

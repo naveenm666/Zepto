@@ -16,7 +16,7 @@
               </div>
             </div> 
           <% end %>
-          <div style="position: absolute; bottom: 15px; left: 60%; transform: translateX(-50%);">
+          <div style="position: absolute; bottom: 15px; left: 60%; transform: translateX(-50%); padding-right:25px;">
             <div id="quantity-buttons-<%= product.id %>">
               <% if user_signed_in? %>
                 <% if @cart.cart_products.where(product_id: product.id).exists? %>

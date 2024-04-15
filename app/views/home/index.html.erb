@@ -1,7 +1,7 @@
-
+<div style="margin-top:100px;"></div>
   <div class="container">
     <div class="row bg-green"> 
-      <img alt="paan-corner-banner" fetchpriority="high" width="1458" height="255" decoding="async" data-nimg="1" class="relative overflow-hidden false p-4 w-full pt-[5.5rem]" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcset="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 256w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 384w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 640w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 750w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 828w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 1080w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 1200w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 1920w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 2048w, https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png 3840w" src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/8.2.6/tr:w-1280,ar-1438-235,pr-true,f-auto,q-80//images/paan-corner/paan-corner-banner-desktop.png" style="color: transparent; object-fit: fill;">
+     <img alt="paan-corner-banner" width="1248px" height="204px" href="	https://cdn.zeptonow.com/web-static-assets-prod/ar…images/paan-corner/paan-corner-banner-desktop.png"> </img>
     </div>
   </div>
 
@@ -33,7 +33,7 @@
       <div class="mr-2" style="display: inline-block; position: relative; width: 180px;">
         <%= link_to product_path(product) do %>
           <div class="card" style="width: 170px; height: 220px; position: relative;">
-            <div class="card-body" style="overflow: hidden; text-overflow: ellipsis; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);">
+            <div class="card-body CB_1" style="overflow: hidden; text-overflow: ellipsis; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);">
               <h5 class="card-title" style="font-size: 16px; white-space: normal;"><strong><%= product.name %></strong></h5>
               <p class="card-text" style="font-size: 14px;"><%= product.weight %>grms</p>
               <div style="display: flex; align-items: center;">
@@ -83,7 +83,7 @@
           <% category_slice.each do |category| %>
             <div class="col-2">
               <a href="<%= category_path(category) %>">
-                <div class="card category-container" style="width: 100%; height: 150px;"> 
+                <div class="card category-container " style="width: 100%; height: 150px;"> 
                   <div class="card-body">
                   </div>
                 </div>
@@ -95,6 +95,8 @@
       <% end %>
     </div>
   </div>
+
+  
 
   <div class="container " style="margin-top:40px;">
     <% @products.first(10).each_slice(5) do |products_slice| %>

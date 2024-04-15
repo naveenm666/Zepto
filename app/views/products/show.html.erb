@@ -22,7 +22,7 @@
       <h4><%= @product.name %></h4>
       <p><%= @product.weight %> grams</p>
       <h4><%= number_to_currency(@product.price, unit: '₹') %></h4>
-      <div id="quantity-buttons-<%= @product.id %>">
+      <div id="quantity-buttons-<%= @product.id %>" style="padding-right: 560px;">
         <% if user_signed_in? %>
           <% if @cart.cart_products.where(product_id: @product.id).exists? %>
             <%= render partial: 'carts/quantity_buttons', locals: { cart_product: @cart.cart_products.find_by(product_id: @product.id), product: @product } %>

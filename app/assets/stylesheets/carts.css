@@ -3,10 +3,18 @@
     border: 1px solid #de0808;
     color: #f9fffe;
     font-size: .9rem;
-    font-weight: 600;
-    line-height: 30px;
-    margin: 10px;
+    line-height: 35px;
+    border-radius: 5px;
 }
+.custom-button{
+  background-color: #de0808;
+  border: none;
+  font-size: 18px;
+  line-height: 30px;
+  color:  #f9fffe;
+
+}
+
 
 .bg-skyblue {
     background-color: rgb(146, 227, 234);
@@ -18,3 +26,24 @@
     margin-top: 90px;
     overflow-y: auto;
  }
+
+ .n_1{
+  width: 550px; /* Adjust width as needed */
+  margin-bottom: 20px; /* Adjust margin as needed */
+  background-color: rgb(246, 246, 246);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+
+
+}
+.C_2{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.n_2{
+  left: 25px;
+  width: 400px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-color: rgb(246, 246, 246);
+
+}
